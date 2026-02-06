@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->text('address');
-            $table->date('membership_date')->default(now());
+            $table->date('membership_date')->useCurrent();
             $table->string('whatsApp_number')->nullable();
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
