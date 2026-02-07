@@ -23,9 +23,22 @@ class Book extends Model
         'genra',
     ];
     public function Authors(){
-        $this->belongsToMany(Author::class , 'author_id');
+       return $this->belongsTo(Author::class , 'author_id');
     }
     public function borrowing(){
-        $this->hasMany(borrowing::class , 'book_id');
+       return  $this->hasMany(borrowing::class , 'book_id');
+    }
+    public function isAvialble(){
+        return $this->available_copies> 0 ;
+    }
+    public function barrow(){
+        if($this->available_copies> 0){
+            $this->decrement('available_copies');
+        }
+    }
+    public function returnBook(){
+        if($this->available_copies < $this->total_copies){
+            $this->increment('available_copies');
+        };
     }
 }

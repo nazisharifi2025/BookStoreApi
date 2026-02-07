@@ -18,6 +18,6 @@ class member extends Model
         'status',
     ];
     public function member(){
-        $this->hasMany(member::class , 'member_id');
+        $this->hasMany(borrowing::class , 'member_id');
     }
 }

@@ -21,6 +21,6 @@ class borrowing extends Model
         $this->belongsToMany(Book::class , 'book_id');
     }
     public function member_borrowing(){
-        $this->belongsToMany(member::class , 'member_id');
+        $this->belongsTo(member::class , 'member_id');
     }
 }
