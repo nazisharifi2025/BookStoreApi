@@ -17,7 +17,13 @@ class member extends Model
         'whatsApp_number',
         'status',
     ];
-    public function member(){
-        $this->hasMany(borrowing::class , 'member_id');
-    }
+    protected $casts = [
+        'membership_date',
+    ];
+   public function borrowing(){
+    return $this->belongsTo(borrowing::class);
+   }
+   public function activBorroing(){
+    return $this->borrowing()->where('status' , 'borrowed');
+   }
 }
