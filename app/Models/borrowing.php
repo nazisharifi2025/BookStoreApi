@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,11 +17,19 @@ class borrowing extends Model
         'due_date',
         'returned_date',
         'status',
+    ]; 
+    protected $casts = [
+         'borrowed_date',
+        'due_date',
+        'returned_date',
     ];
     public function books(){
-        $this->belongsToMany(Book::class , 'book_id');
+        $this->belongsTo(Book::class);
     }
     public function member_borrowing(){
-        $this->belongsTo(member::class , 'member_id');
+        $this->belongsTo(member::class);
+    }
+    public function isOverdue(){
+        return $this->cue_date < Carbon::today() && $this->status === "borrowed";
     }
 }
