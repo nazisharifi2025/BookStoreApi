@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAuthorRequest;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -21,7 +22,7 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateAuthorRequest $request)
     {
         //
         Author::create([
