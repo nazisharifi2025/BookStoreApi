@@ -30,6 +30,6 @@ class borrowing extends Model
         $this->belongsTo(member::class);
     }
     public function isOverdue(){
-        return $this->cue_date < Carbon::today() && $this->status === "borrowed";
+        return $this->due_date < Carbon::today() && $this->status === "borrowed";
     }
 }
