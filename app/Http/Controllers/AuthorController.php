@@ -22,13 +22,16 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateAuthorRequest $request)
+    public function store(Request $request)
     {
         //
-        Author::create([
+        $author = Author::create([
             "name"=> $request->name,
             "bio"=> $request->bio,
             "nationality"=> $request->nationality,
+        ]);
+        return response()->json([
+            "created_author"=> $author
         ]);
     }
 
