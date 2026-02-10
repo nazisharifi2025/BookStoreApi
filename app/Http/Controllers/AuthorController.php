@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateAuthorRequest;
+use App\Http\Resources\AuthorResource;
 use App\Models\Author;
 use Illuminate\Http\Request;
 
@@ -13,10 +14,9 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $author = Author::all();
-        return response()->json([
-            "author"=> $author,
-        ]);
+
+        $authors = Author::paginate(10);
+        return AuthorResource::collection($authors);
     }
 
     /**
@@ -40,7 +40,10 @@ class AuthorController extends Controller
      */
     public function show(string $id)
     {
-        //
+       $Author = Author::findOrfail($id);
+       response()->json([
+        "SingelAuthor"=> $Author,
+       ]);
     }
 
     /**
@@ -48,7 +51,10 @@ class AuthorController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $author= Author::firstOrFail($id);
+        return response()->json([
+            "updateAuthor"=> $author,
+        ]);
     }
 
     /**
