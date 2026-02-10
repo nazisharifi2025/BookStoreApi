@@ -49,9 +49,10 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateAuthorRequest $request, string $id)
     {
         $author= Author::firstOrFail($id);
+        $author->update($request->validated());
         return response()->json([
             "updateAuthor"=> $author,
         ]);
