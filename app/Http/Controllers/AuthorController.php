@@ -62,6 +62,10 @@ class AuthorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $authorFind = Author::findOrfial($id);
+        $authorFind->delete();
+        return response()->json([
+        "deletedAuthor"=> "one author deleted"
+        ]);
     }
 }
