@@ -49,9 +49,8 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateAuthorRequest $request, string $id)
+    public function update(CreateAuthorRequest $request, Author $author)
     {
-       $author = Author::findOrfail($id);
        $author->update($request->validated());
        return response()->json([
         "UpdetedData"=> $author 
@@ -60,10 +59,9 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Author $author)
     {
-        $authorFind = Author::findOrfial($id);
-        $authorFind->delete();
+        $author->delete();
         return response()->json([
         "deletedAuthor"=> "one author deleted"
         ]);
