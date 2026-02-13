@@ -15,8 +15,8 @@ class AuthorController extends Controller
     public function index()
     {
 
-        $authors = Author::with('book');
-        return AuthorResource::collection($authors);
+        $authors = Author::all();
+        return  AuthorResource::collection($authors);
     }
 
     /**
@@ -41,7 +41,7 @@ class AuthorController extends Controller
     public function show(string $id)
     {
        $Author = Author::findOrfail($id);
-       response()->json([
+       return response()->json([
         "SingelAuthor"=> $Author,
        ]);
     }
@@ -49,8 +49,9 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CreateAuthorRequest $request, Author $author)
+    public function update(CreateAuthorRequest $request, string $id)
     {
+        $author = Author::findOrFail($id);
        $author->update($request->validated());
        return response()->json([
         "UpdetedData"=> $author 
