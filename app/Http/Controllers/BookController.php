@@ -44,7 +44,10 @@ class BookController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $book = Book::findOrFial($id);
+        return response()->json([
+            "shoingData"=> $book,
+        ]);
     }
 
     /**
@@ -52,7 +55,20 @@ class BookController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updateBook = Book::findOrFial($id);
+        $updateBook->update([
+            "title"=> $request->title,
+            "isbn"=> $request->isbn,
+            "description"=> $request->description,
+            "published_at"=> $request->publishedAt ,
+            "cover_image"=> $request->image	,
+            "price"=> $request->price,
+            "author_id"=> $request->author_id,
+            "genra"=> $request->genra,
+        ]);
+        return response()->json()[
+            "updatdBok"=> $updateBook,
+        ];
     }
 
     /**
