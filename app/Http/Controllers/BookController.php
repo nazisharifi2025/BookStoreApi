@@ -66,9 +66,9 @@ class BookController extends Controller
             "author_id"=> $request->author_id,
             "genra"=> $request->genra,
         ]);
-        return response()->json()[
+        return response()->json([
             "updatdBok"=> $updateBook,
-        ];
+        ]);
     }
 
     /**
