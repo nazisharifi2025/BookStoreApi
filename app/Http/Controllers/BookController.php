@@ -76,6 +76,10 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $FindBook = Book::findOrFial($id);
+        $findBook->delete();
+        return response()->json([
+            "deleted book"=> $findBook,
+        ]);
     }
 }
