@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateBookRequest;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -53,19 +54,10 @@ class BookController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateBookRequest $request, string $id)
     {
         $updateBook = Book::findOrFial($id);
-        $updateBook->update([
-            "title"=> $request->title,
-            "isbn"=> $request->isbn,
-            "description"=> $request->description,
-            "published_at"=> $request->publishedAt ,
-            "cover_image"=> $request->image	,
-            "price"=> $request->price,
-            "author_id"=> $request->author_id,
-            "genra"=> $request->genra,
-        ]);
+        $updateBook->update($request->validate());
         return response()->json([
             "updatdBok"=> $updateBook,
         ]);
@@ -76,7 +68,7 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
-        $FindBook = Book::findOrFial($id);
+        $findBook = Book::findOrFial($id);
         $findBook->delete();
         return response()->json([
             "deleted book"=> $findBook,
