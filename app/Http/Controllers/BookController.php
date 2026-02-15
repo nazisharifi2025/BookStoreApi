@@ -32,12 +32,13 @@ class BookController extends Controller
             "totalCopies" => $request->totalCopies,
             "avaliable_copies"=> $request->avaliable_copies,
             "cover_image"=> $request->image	,
+            "status"=> $request->status,
             "price"=> $request->price,
             "author_id"=> $request->author_id,
             "genra"=> $request->genra,	
         ]);
         return response()->json([
-            "createData"=> $books,
+            "createBook"=> $books,
         ]);
 
     }
@@ -49,7 +50,7 @@ class BookController extends Controller
     {
         $book = Book::findOrFial($id);
         return response()->json([
-            "shoingData"=> $book,
+            "shoingBook"=> $book,
         ]);
     }
 
@@ -73,7 +74,7 @@ class BookController extends Controller
         $findBook = Book::findOrFial($id);
         $findBook->delete();
         return response()->json([
-            "deleted book"=> $findBook,
+            "deletedbook"=> $findBook,
         ]);
     }
 }
