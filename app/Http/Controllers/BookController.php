@@ -29,6 +29,8 @@ class BookController extends Controller
             "isbn"=> $request->isbn,
             "description"=> $request->description,
             "published_at"=> $request->publishedAt ,
+            "totalCopies" => $request->totalCopies,
+            "avaliable_copies"=> $request->avaliable_copies,
             "cover_image"=> $request->image	,
             "price"=> $request->price,
             "author_id"=> $request->author_id,

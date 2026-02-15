@@ -16,7 +16,9 @@ class AuthorController extends Controller
     {
 
         $authors = Author::all();
-        return  AuthorResource::collection($authors);
+        return  response()->json([
+            "index"=> $authors
+        ]);
     }
 
     /**
