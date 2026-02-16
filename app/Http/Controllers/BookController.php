@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Resources\BookRsource;
 use App\Models\Book;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,7 @@ class BookController extends Controller
     public function index()
     {
         $books = Book::with('Authors')->paginate(10);
-        return response()->json([
-            "books"=> $books,
-        ]);
+        return BookRsource::collection($books);
     }
 
     /**
