@@ -18,7 +18,9 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->date('published_at');
             $table->integer('totalCopies')->default(1);
+            // 
             $table->integer('avaliable_copies')->default(1);
+            // 
             $table->string('cover_image');
             $table->enum('status' , ["available" , "unavailable"])->default('available');
             $table->decimal('price',4,2);

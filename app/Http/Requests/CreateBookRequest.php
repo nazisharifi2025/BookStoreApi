@@ -22,7 +22,7 @@ class CreateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-           "title"=> "required|string|min:50",
+           "title"=> "required|string|min:7",
             "isbn"=> "required|string",
             "description"=> "nullable|string",
             "published_at"=> "required",

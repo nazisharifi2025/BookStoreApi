@@ -20,11 +20,11 @@ class BookRsource extends JsonResource
             "description"=> $this->description,
             "published_at"=> $this->publishedAt ,
             "totalCopies" => $this->totalCopies,
-            "avaliable_copies"=> $this->isAvailable(),
+            "avaliable_copies"=> $this->isAvialble(),
             "cover_image"=> $this->image,
             "price"=> $this->price,
-            "author_id"=> new AuthorResource($this->whenLoaded('Authore')),
             "genra"=> $this->genra,
+            "author"=> new AuthorResource($this->whenLoaded('Authors')),
         ];
     }
 }
