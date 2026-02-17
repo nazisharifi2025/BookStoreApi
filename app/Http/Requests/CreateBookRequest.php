@@ -11,7 +11,7 @@ class CreateBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return  true;
     }
 
     /**
@@ -25,11 +25,12 @@ class CreateBookRequest extends FormRequest
            "title"=> "required|string|min:7",
             "isbn"=> "required|string",
             "description"=> "nullable|string",
-            "published_at"=> "required",
+            "published_at"=> "required|date",
+            "total_copies"=> "nullable|integer|max:200",
             "cover_image"=> "required|string",
-            "price"=> "required|min:100",
-            "author_id"=> "required",
-            "genra"=> "required"
+            "price"=> "required|numeric",
+            "author_id"=> "required|exists:authors,id",
+            "genra"=> "required|string"
         ];
     }
 }
