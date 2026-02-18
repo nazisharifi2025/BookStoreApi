@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\member;
 use Illuminate\Http\Request;
 
 class MembersController extends Controller
@@ -11,7 +12,8 @@ class MembersController extends Controller
      */
     public function index()
     {
-        //
+        $Members = member::paginate(10);
+        return response()->json($Members);
     }
 
     /**
