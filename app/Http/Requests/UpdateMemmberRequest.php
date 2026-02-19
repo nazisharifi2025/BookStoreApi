@@ -22,7 +22,7 @@ class UpdateMemmberRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'name'=> "nullable|string|min:6",
+            'name'=> "nullable|string|min:6",
             'email'=>"nullable|string",
             'address'=>"nullable|string",
             'membership_date'=> "nullable|date",

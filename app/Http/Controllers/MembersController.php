@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateMemmberRequest;
+use App\Http\Requests\UpdateMemmberRequest;
 use App\Http\Resources\MembersResource;
 use App\Models\member;
+use FFI\Exception;
 use Illuminate\Http\Request;
 
 class MembersController extends Controller
@@ -41,9 +43,19 @@ class MembersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateMemmberRequest $request, string $id)
     {
-        //
+        try{
+            $member = member::findOrFail($id);
+        $member->update($request->validated());
+        return response()->json([
+            "updateMember"=> $member,
+        ]);
+        }catch(Exception $err){
+            return response()->json([
+                "message" => "Can not update"
+            ]);
+        }
     }
 
     /**
@@ -51,6 +63,10 @@ class MembersController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $member = member::findOrFail($id);
+        $member->delete();
+        return response()->json([
+            "deleted member"=> $member,
+        ]);
     }
 }
