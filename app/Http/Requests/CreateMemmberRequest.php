@@ -22,11 +22,11 @@ class CreateMemmberRequest extends FormRequest
     public function rules(): array
     {
         return [
-             'name'=> "required|string|min:6",
-            'email'=>"required|string",
+             'name'=> "required|string|min:3|max:32",
+            'email'=>"required|string|min:3|max:65",
             'address'=>"required|string",
             'membership_date'=> "nullable|date",
-            'whatsApp_number'=>"nullable|string|max:10",
+            'whatsApp_number'=>"nullable|string|max:14",
             'status'=> "nullable|string",
         ];
     }
