@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\borrowing;
 use Illuminate\Http\Request;
 
 class BorrowingController extends Controller
@@ -11,7 +12,10 @@ class BorrowingController extends Controller
      */
     public function index()
     {
-        //
+        $borrow = borrowing::all();
+        return response()->json([
+            "return borrow"=> $borrow,
+        ]);
     }
 
     /**
