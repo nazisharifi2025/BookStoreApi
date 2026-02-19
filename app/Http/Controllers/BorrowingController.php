@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createBorrowRequest;
 use App\Http\Requests\updateBorrowRequest;
 use App\Models\borrowing;
+use Exception;
 use Illuminate\Http\Request;
 
 class BorrowingController extends Controller
@@ -58,10 +59,16 @@ class BorrowingController extends Controller
      */
     public function destroy(string $id)
     {
+        try{
        $borrow = borrowing::findOrFail($id);
        $borrow->delete();
        return response()->json([
         "messeges"=> "this borowing deleted"
        ]);
+        }catch(Exception $err){
+            return response()->json([
+                "error"=> "somting went wrong"
+            ]);
+        }
     }
 }
