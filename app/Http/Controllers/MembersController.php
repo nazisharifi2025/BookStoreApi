@@ -25,8 +25,14 @@ class MembersController extends Controller
      */
     public function store(CreateMemmberRequest $request)
     {
+        try{
         $Members = member::create($request->validated());
         return response()->json($Members);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "no created member",
+            ]);
+        }
     }
 
     /**
