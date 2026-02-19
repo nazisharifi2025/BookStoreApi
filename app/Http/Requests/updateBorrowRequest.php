@@ -11,7 +11,7 @@ class updateBorrowRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class updateBorrowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+               "book_id"=>"nullable|integer",
+        'member_id'=>"nullable|integer",
+        'borrowed_date'=>"nullable|date",
+        'due_date'=> "nullable|date",
+        'returned_date'=>"nullable|date",
+        'status'=> "nullable|string",
         ];
     }
 }
