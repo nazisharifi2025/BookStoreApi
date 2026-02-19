@@ -6,6 +6,7 @@ use App\Http\Requests\CreateBookRequest;
 use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookRsource;
 use App\Models\Book;
+use Exception;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -58,10 +59,16 @@ class BookController extends Controller
      */
     public function destroy(string $id)
     {
+        try{
         $findBook = Book::findOrFial($id);
         $findBook->delete();
         return response()->json([
-            "deletedbook"=> $findBook,
+            "deletedbook"=> $findBook->title ."Deleted successfuly",
         ]);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "this book is not deleted",
+            ]);
+        }
     }
 }
