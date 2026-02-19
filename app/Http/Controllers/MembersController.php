@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateMemmberRequest;
+use App\Http\Resources\MembersResource;
 use App\Models\member;
 use Illuminate\Http\Request;
 
@@ -12,16 +14,17 @@ class MembersController extends Controller
      */
     public function index()
     {
-        $Members = member::paginate(10);
-        return response()->json($Members);
+        $Members = member::with('borrowing')->paginate(5);
+        return MembersResource::collection($Members);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateMemmberRequest $request)
     {
-        //
+        $Members = member::create($request->validated());
+        return response()->json($Members);
     }
 
     /**
@@ -29,7 +32,10 @@ class MembersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $SingelMember = member::findOrFail($id);
+        return response()->json([
+            "singleMmber"=> $SingelMember,
+        ]);
     }
 
     /**

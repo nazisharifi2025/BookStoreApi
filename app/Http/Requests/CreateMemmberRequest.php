@@ -11,7 +11,7 @@ class CreateMemmberRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class CreateMemmberRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+             'name'=> "required|string|min:6",
+            'email'=>"required|string",
+            'address'=>"required|string",
+            'membership_date'=> "nullable|date",
+            'whatsApp_number'=>"nullable|string|max:10",
+            'status'=> "nullable|string",
         ];
     }
 }
