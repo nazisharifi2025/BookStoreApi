@@ -35,7 +35,10 @@ class BorrowingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $borrow = borrowing::findOrFail($id);
+        return response()->json([
+            "shoing borrow"=> $borrow,
+        ]);
     }
 
     /**
