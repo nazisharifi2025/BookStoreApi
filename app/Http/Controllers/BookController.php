@@ -47,11 +47,17 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, string $id)
     {
+        try{
         $updateBook = Book::findOrFail($id);
         $updateBook->update($request->validated());
         return response()->json([
             "updatdBok"=> $updateBook,
         ]);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "Somting Went Wrong",
+            ]);
+        }
     }
 
     /**
