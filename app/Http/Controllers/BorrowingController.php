@@ -59,6 +59,10 @@ class BorrowingController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       $borrow = borrow::findOrFail($id);
+       $borrow->delete();
+       return response()->json([
+        "messeges"=> "this borowing deleted"
+       ]);
     }
 }
