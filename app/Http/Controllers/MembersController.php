@@ -63,10 +63,16 @@ class MembersController extends Controller
      */
     public function destroy(string $id)
     {
+        try{
         $member = member::findOrFail($id);
         $member->delete();
         return response()->json([
             "deleted member"=> $member,
         ]);
+        }catch(Exception $err){
+            return response()->json([
+                "error"=> "Somting went wrong"
+            ]);
+        }
     }
 }
