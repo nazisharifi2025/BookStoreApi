@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\createBorrowRequest;
+use App\Http\Requests\updateBorrowRequest;
 use App\Models\borrowing;
 use Illuminate\Http\Request;
 
@@ -44,9 +45,13 @@ class BorrowingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(updateBorrowRequest $request, string $id)
     {
-        //
+        $borrow = borrowing::findOrFail($id);
+        $borrow->update($request->validated());
+        return response()->json([
+            "update data"=> $borrow,
+        ]);
     }
 
     /**
