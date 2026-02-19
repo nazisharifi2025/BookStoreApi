@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createBorrowRequest;
 use App\Models\borrowing;
 use Illuminate\Http\Request;
 
@@ -21,9 +22,12 @@ class BorrowingController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(createBorrowRequest $request)
     {
-        //
+        $borrow = borrowing::create($request->validated());
+        return response()->json([
+            "create Borrow"=> $borrow,
+        ]);
     }
 
     /**
