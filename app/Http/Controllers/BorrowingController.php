@@ -45,9 +45,8 @@ class BorrowingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateBorrowRequest $request, string $id)
+    public function update(updateBorrowRequest $request, borrowing $borrow)
     {
-        $borrow = borrowing::findOrFail($id);
         $borrow->update($request->validated());
         return response()->json([
             "update data"=> $borrow,
@@ -59,7 +58,7 @@ class BorrowingController extends Controller
      */
     public function destroy(string $id)
     {
-       $borrow = borrow::findOrFail($id);
+       $borrow = borrowing::findOrFail($id);
        $borrow->delete();
        return response()->json([
         "messeges"=> "this borowing deleted"
