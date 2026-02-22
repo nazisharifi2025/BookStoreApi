@@ -18,6 +18,7 @@ class BookFactory extends Factory
     {
         return [
             "title"=> $this->faker->sentence(3),
+            "isbn"=>$this->faker->isbn13(),
         ];
     }
 }
