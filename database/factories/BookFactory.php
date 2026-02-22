@@ -22,6 +22,7 @@ class BookFactory extends Factory
             "isbn"=>$this->faker->isbn13(),
             "description"=>$this->faker->paragraph(),
             "author_id"=> Author::inRandomOrder()->first()->id ?? Author::factory(),
+            "genra"=> $this->faker->randomElement(['fiction','motivational','Non-fiction','Fantasy','Romance']),
         ];
     }
 }
