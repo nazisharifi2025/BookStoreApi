@@ -27,6 +27,7 @@ class BookFactory extends Factory
              "total_copies"=>$this->faker->numberBetween(1,50),
              "available_copies"=>$this->faker->numberBetween(1,50),
              "price"=>$this->faker->randomFloat(2, 5, 99),
+             "cover_image"=>$this->faker->imageUrl(200,300,'books',true),
         ];
     }
 }
