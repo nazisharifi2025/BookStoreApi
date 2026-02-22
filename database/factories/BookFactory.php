@@ -24,6 +24,9 @@ class BookFactory extends Factory
             "author_id"=> Author::inRandomOrder()->first()->id ?? Author::factory(),
             "genra"=> $this->faker->randomElement(['fiction','motivational','Non-fiction','Fantasy','Romance']),
              "published_at"=>$this->faker->date(),
+             "total_copies"=>$this->faker->numberBetween(1,50),
+             "available_copies"=>$this->faker->numberBetween(1,50),
+             
         ];
     }
 }
