@@ -59,7 +59,7 @@ class MembersController extends Controller
         ]);
         }catch(Exception $err){
             return response()->json([
-                "message" => "Member with ". $id . " con not updated somting went worng"
+                "message" => "Member with ". $id . " can not updated somting went worng"
             ]);
         }
     }
