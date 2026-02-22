@@ -23,6 +23,7 @@ class BookFactory extends Factory
             "description"=>$this->faker->paragraph(),
             "author_id"=> Author::inRandomOrder()->first()->id ?? Author::factory(),
             "genra"=> $this->faker->randomElement(['fiction','motivational','Non-fiction','Fantasy','Romance']),
+             "published_at"=>$this->faker->date(),
         ];
     }
 }
