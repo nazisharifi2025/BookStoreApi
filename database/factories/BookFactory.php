@@ -26,7 +26,7 @@ class BookFactory extends Factory
              "published_at"=>$this->faker->date(),
              "total_copies"=>$this->faker->numberBetween(1,50),
              "available_copies"=>$this->faker->numberBetween(1,50),
-             
+             "price"=>$this->faker->randomFloat(2, 5, 99),
         ];
     }
 }
