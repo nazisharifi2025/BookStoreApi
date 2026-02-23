@@ -12,10 +12,14 @@ class AuthorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $authors = Author::all();
+        $query = Author::with('books');
+        if($request->has('message')){
+            $message = $query->message;
+            
+        }
         return  AuthorResource::collection($authors);
     }
 
