@@ -27,6 +27,7 @@ class BookController extends Controller
                 });
             });
         }
+        $books = $query->paginate(10);
         return BookRsource::collection($books);
     }
 
