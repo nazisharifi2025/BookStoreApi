@@ -15,10 +15,15 @@ class AuthorController extends Controller
     public function index(Request $request)
     {
 
-        $query = Author::with('books');
+        $query = Author::with('Book');
         if($request->has('message')){
             $message = $query->message;
-            
+            $query->where(function($qu)use($message){
+                $qu->where('name','LIKE',"%{$message}%")
+                ->orWhereHas('Book', function($BookQuery) use($message){
+                    $BookQuery->where('title', 'LIKE', "%{$message}%");
+                });
+            });
         }
         return  AuthorResource::collection($authors);
     }
