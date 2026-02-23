@@ -14,9 +14,16 @@ class MembersController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $Members = member::with('borrowing')->paginate(5);
+        $q = member::with('borrowing');
+        if($request->has('search')){
+            $search = $request->search;
+            $q->where(function($query)use($search){
+                $query->where('name', 'LIKE', "%{$search}%")
+                
+            });
+        }
         return MembersResource::collection($Members);
     }
 
