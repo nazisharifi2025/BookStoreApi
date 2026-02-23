@@ -27,6 +27,7 @@ class MembersController extends Controller
                 });
             });
         }
+        $Members = $q->paginate(6);
         return MembersResource::collection($Members);
     }
 
