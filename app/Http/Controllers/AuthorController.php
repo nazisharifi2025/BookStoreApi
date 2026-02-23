@@ -25,6 +25,7 @@ class AuthorController extends Controller
                 });
             });
         }
+        $authors = $query->paginate(5);
         return  AuthorResource::collection($authors);
     }
 
