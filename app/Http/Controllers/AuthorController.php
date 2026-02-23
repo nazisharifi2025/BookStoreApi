@@ -16,17 +16,17 @@ class AuthorController extends Controller
     {
 
         $query = Author::with('Book');
-        if($request->has('message')){
-            $message = $query->message;
-            $query->where(function($qu)use($message){
-                $qu->where('name','LIKE',"%{$message}%")
-                ->orWhereHas('Book', function($BookQuery) use($message){
-                    $BookQuery->where('title', 'LIKE', "%{$message}%");
+        if($request->has('search')){
+            $search = $request->search;
+            $query->where(function($qu)use($search){
+                $qu->where('name','LIKE',"%{$search}%")
+                ->orWhereHas('Book', function($BookQuery) use($search){
+                    $BookQuery->where('title', 'LIKE', "%{$search}%");
                 });
             });
         }
         $authors = $query->paginate(5);
-        return  AuthorResource::collection($authors);
+        return  response()->json($authors);
     }
 
     /**

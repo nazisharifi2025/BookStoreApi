@@ -15,6 +15,6 @@ class Author extends Model
         "nationality",
     ];
     public function Book(){
-        $this->hasMany(Book::class,'author_id');
+       return $this->hasMany(Book::class,'author_id');
     }
 }
