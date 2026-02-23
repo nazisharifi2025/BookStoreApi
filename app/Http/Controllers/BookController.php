@@ -37,11 +37,14 @@ class BookController extends Controller
     public function store(CreateBookRequest $request)
     {
         try{
-
+            $books = Book::create($request->validated());
+        $books->load("authors");
+        return new BookRsource($books);
         }
         catch(Exception $err){
             return $err;
         }
+
     }
 
     /**
