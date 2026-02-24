@@ -67,10 +67,12 @@ class BorrowingController extends Controller
      */
     public function update(updateBorrowRequest $request, borrowing $borrow)
     {
-        $borrow->update($request->validated());
+     try{
+           $borrow->update($request->validated());
         return response()->json([
             "update data"=> $borrow,
         ]);
+     }
     }
 
     /**
