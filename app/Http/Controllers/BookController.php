@@ -16,7 +16,8 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Book::with('Authors');
+        try{
+            $query = Book::with('Authors');
         if($request->has('search')){
             $search = $request->search;
             $query->where(function($q) use($search){
@@ -29,6 +30,7 @@ class BookController extends Controller
         }
         $books = $query->paginate(10);
         return BookRsource::collection($books);
+        }
     }
 
     /**
