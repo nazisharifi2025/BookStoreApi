@@ -32,7 +32,7 @@ class MembersController extends Controller
         return MembersResource::collection($Members);
        }
        catch(Exception $error){
-        
+        return $error;
        }
     }
 
