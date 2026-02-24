@@ -79,11 +79,13 @@ class AuthorController extends Controller
      */
     public function update(CreateAuthorRequest $request, string $id)
     {
-        $author = Author::findOrFail($id);
+       try{
+         $author = Author::findOrFail($id);
        $author->update($request->validated());
        return response()->json([
         "UpdetedData"=> $author 
        ]);
+       }
     }
     /**
      * Remove the specified resource from storage.
