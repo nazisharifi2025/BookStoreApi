@@ -31,10 +31,12 @@ class BorrowingController extends Controller
      */
     public function store(createBorrowRequest $request)
     {
-        $borrow = borrowing::create($request->validated());
+      try{
+          $borrow = borrowing::create($request->validated());
         return response()->json([
             "create Borrow"=> $borrow,
         ]);
+      }
     }
 
     /**
