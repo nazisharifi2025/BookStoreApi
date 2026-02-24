@@ -31,6 +31,11 @@ class BookController extends Controller
         $books = $query->paginate(10);
         return BookRsource::collection($books);
         }
+        catch(Exception $err){
+            return response()->json([
+                "messege"=> "Somting Went Wrong",
+            ]);
+        }
     }
 
     /**
