@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateAuthorRequest;
 use App\Http\Resources\AuthorResource;
 use App\Models\Author;
+use Exception;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -28,6 +29,9 @@ class AuthorController extends Controller
         }
         $authors = $query->paginate(5);
         return  response()->json($authors);
+        }
+        catch(Exception $err){
+            return $err ;
         }
     }  
 
