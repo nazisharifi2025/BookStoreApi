@@ -37,6 +37,11 @@ class BorrowingController extends Controller
             "create Borrow"=> $borrow,
         ]);
       }
+      catch(Exception $err){
+        return response()->json([
+            "messege"=> "Somting Went Wrong",
+        ]);
+      }
     }
 
     /**
