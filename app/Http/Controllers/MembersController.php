@@ -16,7 +16,8 @@ class MembersController extends Controller
      */
     public function index(Request $request)
     {
-        $q = member::with('activBorroing');
+       try{
+         $q = member::with('activBorroing');
         if($request->has('search')){
             $search = $request->search;
             $q->where(function($query)use($search){
@@ -29,6 +30,7 @@ class MembersController extends Controller
         }
         $Members = $q->paginate(6);
         return MembersResource::collection($Members);
+       }
     }
 
     /**
