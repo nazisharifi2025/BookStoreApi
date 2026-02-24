@@ -67,6 +67,11 @@ class AuthorController extends Controller
         "SingelAuthor"=> $Author,
        ]);
       }
+      catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $id . " not found"
+        ]);
+      }
     }
 
     /**
