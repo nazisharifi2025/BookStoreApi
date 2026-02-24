@@ -86,15 +86,22 @@ class AuthorController extends Controller
         "UpdetedData"=> $author 
        ]);
        }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $id . " not found"
+        ]);
+       }
     }
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Author $author)
     {
-        $author->delete();
+       try{
+         $author->delete();
         return response()->json([
         "deletedAuthor"=> "one author deleted"
         ]);
+       }
     }
 }
