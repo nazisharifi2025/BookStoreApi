@@ -73,6 +73,9 @@ class BorrowingController extends Controller
             "update data"=> $borrow,
         ]);
      }
+     catch(Exception $error){
+        return $error ;
+     }
     }
 
     /**
