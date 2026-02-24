@@ -56,10 +56,12 @@ class MembersController extends Controller
      */
     public function show(string $id)
     {
-        $SingelMember = member::findOrFail($id);
+      try{
+          $SingelMember = member::findOrFail($id);
         return response()->json([
             "singleMmber"=> $SingelMember,
         ]);
+      }
     }
 
     /**
