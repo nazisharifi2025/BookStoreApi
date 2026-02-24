@@ -21,6 +21,9 @@ class BorrowingController extends Controller
             "return borrow"=> $borrow,
         ]);
        }
+       catch(Exception $error){
+        return $error ;
+       }
     }
 
     /**
