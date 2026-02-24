@@ -27,7 +27,7 @@ class AuthorController extends Controller
         }
         $authors = $query->paginate(5);
         return  response()->json($authors);
-    }
+    }  
 
     /**
      * Store a newly created resource in storage.
