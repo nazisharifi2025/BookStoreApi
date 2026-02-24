@@ -103,5 +103,10 @@ class AuthorController extends Controller
         "deletedAuthor"=> "one author deleted"
         ]);
        }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $author->id . " not found"
+        ]);
+       }
     }
 }
