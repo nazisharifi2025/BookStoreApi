@@ -21,10 +21,10 @@ class MembersController extends Controller
             $search = $request->search;
             $q->where(function($query)use($search){
                 $query->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%");
-                // ->orWhereHas('activBorroing', function($qu)use($search){
-                //     $qu->where('name', 'LIKE', "%{$search}%");
-                // });
+                ->orWhere('email', 'LIKE', "%{$search}%")
+                ->orWhereHas('activBorroing', function($qu)use($search){
+                    $qu->where('name', 'LIKE', "%{$search}%");
+                });
             });
         }
         $Members = $q->paginate(6);
