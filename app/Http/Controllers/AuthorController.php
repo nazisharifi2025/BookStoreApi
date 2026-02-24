@@ -40,7 +40,8 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+     try{
+           //
         $author = Author::create([
             "name"=> $request->name,
             "bio"=> $request->bio,
@@ -49,6 +50,7 @@ class AuthorController extends Controller
         return response()->json([
             "created_author"=> $author
         ]);
+     }
     }
 
     /**
