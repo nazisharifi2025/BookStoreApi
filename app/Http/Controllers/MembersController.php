@@ -16,13 +16,13 @@ class MembersController extends Controller
      */
     public function index(Request $request)
     {
-        $q = member::with('borrowing');
+        $q = member::with('activBorroing');
         if($request->has('search')){
             $search = $request->search;
             $q->where(function($query)use($search){
                 $query->where('name', 'LIKE', "%{$search}%")
                 ->orWhere('email', 'LIKE', "%{$search}%");
-                // ->orWhereHas('borrowing', function($qu)use($search){
+                // ->orWhereHas('activBorroing', function($qu)use($search){
                 //     $qu->where('name', 'LIKE', "%{$search}%");
                 // });
             });
