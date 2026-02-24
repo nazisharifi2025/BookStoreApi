@@ -14,7 +14,8 @@ class AuthorController extends Controller
      */
     public function index(Request $request)
     {
-
+        try{
+            
         $query = Author::with('Book');
         if($request->has('search')){
             $search = $request->search;
@@ -27,6 +28,7 @@ class AuthorController extends Controller
         }
         $authors = $query->paginate(5);
         return  response()->json($authors);
+        }
     }  
 
     /**
