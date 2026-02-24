@@ -15,10 +15,12 @@ class BorrowingController extends Controller
      */
     public function index()
     {
-        $borrow = borrowing::all();
+       try{
+         $borrow = borrowing::all();
         return response()->json([
             "return borrow"=> $borrow,
         ]);
+       }
     }
 
     /**
