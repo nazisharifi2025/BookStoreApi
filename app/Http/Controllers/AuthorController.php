@@ -51,6 +51,9 @@ class AuthorController extends Controller
             "created_author"=> $author
         ]);
      }
+     catch(Exception $error){
+        return response()->json($error);
+     }
     }
 
     /**
