@@ -62,6 +62,11 @@ class MembersController extends Controller
             "singleMmber"=> $SingelMember,
         ]);
       }
+      catch(Exception $err){
+        return response()->json([
+            "message"=> "Member with ". $id . " not found"
+        ]);
+      }
     }
 
     /**
