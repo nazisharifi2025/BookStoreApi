@@ -65,6 +65,11 @@ class BookController extends Controller
             "shoingBook"=> $book,
         ]);
        }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Book with ". $id . " not found"
+        ]);
+       }
     }
 
     /**
