@@ -61,10 +61,12 @@ class AuthorController extends Controller
      */
     public function show(string $id)
     {
-       $Author = Author::findOrfail($id);
+      try{
+         $Author = Author::findOrfail($id);
        return response()->json([
         "SingelAuthor"=> $Author,
        ]);
+      }
     }
 
     /**
