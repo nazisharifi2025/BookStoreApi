@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\createBorrowRequest;
 use App\Http\Requests\updateBorrowRequest;
+use App\Http\Resources\BorrowResource;
 use App\Models\borrowing;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,9 +35,7 @@ class BorrowingController extends Controller
     {
       try{
           $borrow = borrowing::create($request->validated());
-        return response()->json([
-            "create Borrow"=> $borrow,
-        ]);
+        return new BorrowResource($borrow);
       }
       catch(Exception $err){
         return response()->json([
