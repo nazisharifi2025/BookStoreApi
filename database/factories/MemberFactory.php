@@ -18,7 +18,7 @@ class MemberFactory extends Factory
     {
         return [
              "name"=>$this->faker->name(),
-        // 'email',
+        'email'=>$this->faker->unique()->safeEmail(),
         // 'address',
         // 'membership_date',
         // 'whatsApp_number',
