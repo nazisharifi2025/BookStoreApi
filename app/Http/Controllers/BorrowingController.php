@@ -65,9 +65,10 @@ class BorrowingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(updateBorrowRequest $request, borrowing $borrow)
+    public function update(updateBorrowRequest $request, string $id)
     {
      try{
+        $borrow = borrowing::findOrFail($id);
            $borrow->update($request->validated());
         return response()->json([
             "update data"=> $borrow,
