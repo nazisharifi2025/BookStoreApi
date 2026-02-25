@@ -15,8 +15,8 @@ class BorrowResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-        "book_id" =>$this->book_id,
-        'member_id'=> $this->membere_id,
+        "book_id" => $this->books(),
+        'member_id'=>$this->member_borrowing(),
         'borrowed_date'=>$this->borrowed_data,
         'due_date'=>$this->due_date,
         'returned_date'=>$this->returned_date,

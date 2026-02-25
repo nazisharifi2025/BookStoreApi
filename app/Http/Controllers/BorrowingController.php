@@ -16,7 +16,7 @@ class BorrowingController extends Controller
     public function index()
     {
        try{
-         $borrow = borrowing::all();
+         $borrow = borrowing::with('books', 'member_borrowing');
         return response()->json([
             "return borrow"=> $borrow,
         ]);
