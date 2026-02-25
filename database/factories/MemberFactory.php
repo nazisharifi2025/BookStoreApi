@@ -20,7 +20,7 @@ class MemberFactory extends Factory
              "name"=>$this->faker->name(),
         'email'=>$this->faker->unique()->safeEmail(),
         'address'=>$this->faker->address(),
-        // 'membership_date',
+        'membership_date'=>$this->faker->date(),
         // 'whatsApp_number',
         // 'status',
         ];
