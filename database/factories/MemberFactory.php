@@ -17,7 +17,12 @@ class MemberFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+             "name"=>$this->faker->name(),
+        // 'email',
+        // 'address',
+        // 'membership_date',
+        // 'whatsApp_number',
+        // 'status',
         ];
     }
 }
