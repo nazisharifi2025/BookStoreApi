@@ -22,7 +22,7 @@ class MemberFactory extends Factory
         'address'=>$this->faker->address(),
         'membership_date'=>$this->faker->date(),
         'whatsApp_number'=>$this->faker->phoneNumber(),
-        // 'status',
+        'status'=>$this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }
