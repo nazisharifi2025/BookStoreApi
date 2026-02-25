@@ -22,12 +22,12 @@ class createBorrowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "book_id"=>"required|integer",
-        'member_id'=>"required|integer",
+            "book_id"=>"required|integer|exists:books,id",
+        'member_id'=>"required|integer|exists:members,id",
         'borrowed_date'=>"required|date",
         'due_date'=> "required|date",
-        'returned_date'=>"required|date",
-        'status'=> "nullable|string",
+        // 'returned_date'=>"required|date",
+        // 'status'=> "nullable|string",
         ];
     }
 }
