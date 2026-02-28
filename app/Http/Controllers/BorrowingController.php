@@ -19,9 +19,7 @@ class BorrowingController extends Controller
        try{
          $borrow = borrowing::with(['books', 'member_borrowing']);
          $borrow->load('books', "member_borrowing");
-        return response()->json([
-            "return borrow"=> $borrow,
-        ]);
+        return BorrowResource::collection($borrow);
        }
        catch(Exception $error){
         return $error ;
