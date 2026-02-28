@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CreateBookRequest extends FormRequest
 {
@@ -23,7 +24,8 @@ class CreateBookRequest extends FormRequest
     {
         return [
            "title"=> "required|string|min:7",
-            "isbn"=> "required|string",
+            "isbn"=> ["required",'string', "max:20",
+            Rule::unique('books','isbn')->ignore($this->route('book'),'id')],
             "description"=> "nullable|string",
             "published_at"=> "required|date",
             "total_copies"=> "nullable|integer|max:200",
