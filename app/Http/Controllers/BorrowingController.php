@@ -57,7 +57,7 @@ class BorrowingController extends Controller
        }
        catch(Exception $err){
         return response()->json([
-            "messege"=> "Somting Went Wrong",
+            "messege"=> $err->getMessage(),
         ]);
        }
     }
