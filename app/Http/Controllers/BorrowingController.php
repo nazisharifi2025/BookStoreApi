@@ -52,6 +52,7 @@ class BorrowingController extends Controller
     {
        try{
          $borrow = borrowing::findOrFail($id);
+         $borrow->load('books', "member_borrowing");
         return response()->json([
             "shoing borrow"=> $borrow,
         ]);
