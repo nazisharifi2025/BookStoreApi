@@ -21,7 +21,7 @@ class member extends Model
         'membership_date',
     ];
    public function borrowing(){
-    return $this->belongsTo(borrowing::class, 'member_id');
+    return $this->hasMany(borrowing::class, 'member_id');
    }
    public function activBorroing(){
     return $this->borrowing()->where('status' , 'borrowed');
