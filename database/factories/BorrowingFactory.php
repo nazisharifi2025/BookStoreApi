@@ -21,6 +21,7 @@ class BorrowingFactory extends Factory
         return [
             "book_id"=>Book::inRandomOrder()->first()->id ?? Book::factory(),
             "member_id"=> member::inRandomOrder()->first()->id ?? member::factory(),
+            "borrowed_at"=>$this->faker->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }
