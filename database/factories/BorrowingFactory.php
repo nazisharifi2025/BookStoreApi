@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Book;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,7 @@ class BorrowingFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "book_id"=>Book::inRandomOrder()->first()->id ?? Book::factory(),
         ];
     }
 }
