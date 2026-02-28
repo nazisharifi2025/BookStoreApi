@@ -23,6 +23,7 @@ class BorrowingFactory extends Factory
             "member_id"=> member::inRandomOrder()->first()->id ?? member::factory(),
             "borrowed_at"=>$this->faker->dateTimeBetween('-1 month', 'now'),
             "due_date"=>$this->faker->dateTimeBetween('now', '+1 month'),
+            "returned_date"=>$this->faker->optional()->dateTimeBetween('now', '+1 month'),
         ];
     }
 }
