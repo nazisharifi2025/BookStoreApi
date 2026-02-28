@@ -35,6 +35,7 @@ class BorrowingController extends Controller
     {
       try{
           $borrow = borrowing::create($request->validated());
+          $borrow->load('books', "member_borrowing");
         return new BorrowResource($borrow);
       }
       catch(Exception $err){
