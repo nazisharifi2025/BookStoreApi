@@ -16,7 +16,7 @@ class BorrowResource extends JsonResource
     {
         return [
         "book_id" => new BookRsource($this->whenLoaded('books')),
-        'member_id'=>new BookRsource($this->whenLoaded('member_borrowing')),
+        'member_id'=>new MembersResource($this->whenLoaded('member_borrowing')),
         'borrowed_date'=>$this->borrowed_data,
         'due_date'=>$this->due_date,
         'returned_date'=>$this->returned_date,

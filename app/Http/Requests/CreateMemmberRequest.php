@@ -25,7 +25,7 @@ class CreateMemmberRequest extends FormRequest
         return [
              'name'=> "required|string|min:3|max:32",
             'email'=>["required","string",
-            Rule::unique('members','email')->ignore($this->route('member'),'id')],
+            Rule::unique('members','email')->ignore($this->route('Members'),'id')],
             'address'=>"required|string",
             'membership_date'=> "nullable|date",
             'whatsApp_number'=>"nullable|string|max:14",

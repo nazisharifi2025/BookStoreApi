@@ -22,7 +22,7 @@ class createBorrowRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "book_id"=>"required|integer|exists:books,id",
+        "book_id"=>"required|integer|exists:books,id",
         'member_id'=>"required|integer|exists:members,id",
         'borrowed_date'=>"required|date",
         'due_date'=> "required|date",

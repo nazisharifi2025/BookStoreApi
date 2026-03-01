@@ -90,7 +90,7 @@ class BorrowingController extends Controller
        return response()->json([
         "messeges"=> "this borowing deleted"
        ]);
-        }catch(Exception $err){
+        }catch(Exception $err){  
             return response()->json([
                 "error"=> "somting went wrong"
             ]);
