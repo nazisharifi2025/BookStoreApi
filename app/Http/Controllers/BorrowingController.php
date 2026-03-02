@@ -73,6 +73,10 @@ class BorrowingController extends Controller
     return response()->json([
         "message"=> "This book is not currently borrowed",
     ]);
+    $borrowing->update([
+        "return_date"=> now(),
+        "status"=> "returned",
+    ]);
    }
    }
 }
