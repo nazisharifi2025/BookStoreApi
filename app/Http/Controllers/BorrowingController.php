@@ -90,5 +90,6 @@ class BorrowingController extends Controller
     Borrowing::where('status', 'borrowed')
     ->where('due_date', '<', now())
     ->update(['status' => 'overdue']);
+    return BorrowResource::collection($overdueBorrowings);
    }
 }
