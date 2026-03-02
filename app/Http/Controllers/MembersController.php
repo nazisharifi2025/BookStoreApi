@@ -94,10 +94,18 @@ class MembersController extends Controller
     {
         try{
         $member = member::findOrFail($id);
+        $member->load(['borrowing','activBorroing']);
+      if($member->activBorroing()->count()>0){
+        return response()->json([
+            "message"=> "tou cannot delete ". $member->name . " bacause he/she borrowed " . $member->activBorroing()->count() . " books",
+        ]);
+      }
+      else{
         $member->delete();
         return response()->json([
-            "deleted member"=> $member,
+            "message"=> $member->name . " has been deleted successfully he/she can no longer use our facilities",
         ]);
+      }
         }catch(Exception $err){
             return response()->json([
                 "error"=> "Somting went wrong"

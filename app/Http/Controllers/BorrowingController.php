@@ -69,13 +69,13 @@ class BorrowingController extends Controller
     {
      try{
         $borrow = borrowing::findOrFail($id);
-           $borrow->update($request->validated());
-        return response()->json([
-            "update data"=> $borrow,
-        ]);
+        $borrow->update($request->validated());
+        return new BorrowResource($borrow);
      }
      catch(Exception $error){
-        return $error ;
+        return response()->json([
+            "message"=> $error->getMessage(),
+        ]) ;
      }
     }
 
