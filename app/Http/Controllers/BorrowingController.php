@@ -82,4 +82,7 @@ class BorrowingController extends Controller
     return new BorrowResource($borrowing);
    }
    }
+   public function overdue(){
+    $overdueBorrowings = borrowing::with(['books', 'member_borrowing'])
+   }
 }
