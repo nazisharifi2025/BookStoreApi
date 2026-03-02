@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\createBorrowRequest;
 use App\Http\Requests\updateBorrowRequest;
 use App\Http\Resources\BorrowResource;
+use App\Models\Book;
 use App\Models\borrowing;
 use Exception;
 use Illuminate\Http\Request;
@@ -34,6 +35,11 @@ class BorrowingController extends Controller
       try{
           $borrow = borrowing::create($request->validated());
           $borrow->load('books', "member_borrowing");
+          $bookId = $borrow->books->id;
+          $book = Book::findOrfail($bookId);
+          $book->update([
+            "avaliable_copies"=> $book->avaliable_copies--
+          ]);
         return new BorrowResource($borrow);
       }
       catch(Exception $err){
