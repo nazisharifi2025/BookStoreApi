@@ -71,6 +71,10 @@ class BorrowingController extends Controller
    public function returnBook(Borrowing $borrowing){
     try{
 
+    }catch(Exception $err){
+        return response()->json([
+            "messege"=> $err->getMessage(),
+        ]);
     }
    }
 }
