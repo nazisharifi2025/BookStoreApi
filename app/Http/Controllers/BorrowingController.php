@@ -86,5 +86,9 @@ class BorrowingController extends Controller
     $overdueBorrowings = borrowing::with(['books', 'member_borrowing'])
     ->where('status', 'borrowed')
     ->where('due_date', '<', now())->get();
+
+    Borrowing::where('status', 'borrowed')
+    ->where('due_date', '<', now())
+    ->update(['status' => 'overdue']);
    }
 }
