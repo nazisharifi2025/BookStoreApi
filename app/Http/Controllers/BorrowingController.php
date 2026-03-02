@@ -77,6 +77,8 @@ class BorrowingController extends Controller
         "return_date"=> now(),
         "status"=> "returned",
     ]);
+    $borrowing->books->returnBook();
+    $borrowing->load('books', "member_borrowing");
    }
    }
 }
