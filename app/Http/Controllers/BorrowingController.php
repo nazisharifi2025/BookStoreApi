@@ -68,38 +68,9 @@ class BorrowingController extends Controller
        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(updateBorrowRequest $request, string $id)
-    {
-     try{
-        $borrow = borrowing::findOrFail($id);
-        $borrow->update($request->validated());
-        return new BorrowResource($borrow);
-     }
-     catch(Exception $error){
-        return response()->json([
-            "message"=> $error->getMessage(),
-        ]) ;
-     }
-    }
+   public function returnBook(Borrowing $borrowing){
+    try{
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        try{
-       $borrow = borrowing::findOrFail($id);
-       $borrow->delete();
-       return response()->json([
-        "messeges"=> "this borowing deleted"
-       ]);
-        }catch(Exception $err){  
-            return response()->json([
-                "error"=> "somting went wrong"
-            ]);
-        }
     }
+   }
 }
