@@ -70,7 +70,9 @@ class BorrowingController extends Controller
 
    public function returnBook(Borrowing $borrowing){
    if($borrowing->status !== "borrowed"){
-    
+    return response()->json([
+        "message"=> "This book is not currently borrowed",
+    ]);
    }
    }
 }
