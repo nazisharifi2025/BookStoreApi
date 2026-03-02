@@ -79,6 +79,7 @@ class BorrowingController extends Controller
     ]);
     $borrowing->books->returnBook();
     $borrowing->load('books', "member_borrowing");
+    return new BorrowResource($borrowing);
    }
    }
 }
