@@ -29,16 +29,16 @@ class Book extends Model
        return  $this->hasMany(borrowing::class , 'book_id');
     }
     public function isAvialble(){
-        return $this->available_copies> 0 ;
+        return $this->avaliable_copies> 0 ;
     }
     public function barrow(){
-        if($this->available_copies> 0){
-            $this->decrement('available_copies');
+        if($this->avaliable_copies> 0){
+            $this->decrement('avaliable_copies');
         }
     }
     public function returnBook(){
-        if($this->available_copies < $this->total_copies){
-            $this->increment('available_copies');
+        if($this->avaliable_copies < $this->total_copies){
+            $this->increment('avaliable_copies');
         };
     }
 }

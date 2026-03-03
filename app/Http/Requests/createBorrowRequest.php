@@ -26,8 +26,6 @@ class createBorrowRequest extends FormRequest
         'member_id'=>"required|integer|exists:members,id",
         'borrowed_date'=>"required|date",
         'due_date'=> "required|date",
-        // 'returned_date'=>"required|date",
-        // 'status'=> "nullable|string",
         ];
     }
 }

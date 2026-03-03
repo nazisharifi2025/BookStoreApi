@@ -32,21 +32,21 @@ class BorrowingController extends Controller
      */
     public function store(createBorrowRequest $request)
     {
-      try{
-          $borrow = borrowing::create($request->validated());
-          $borrow->load('books', "member_borrowing");
-          $bookId = $borrow->books->id;
-          $book = Book::findOrfail($bookId);
-          $book->update([
-            "avaliable_copies"=> $book->avaliable_copies--
-          ]);
+       try {
+        $borrow = borrowing::create($request->validated());
+        $borrow->load('books', "member_borrowing");
+
+        $bookId = $borrow->books->id;
+        $book = Book::findOrFail($bookId);
+
+          $book->barrow();
+
         return new BorrowResource($borrow);
-      }
-      catch(Exception $err){
+    } catch (Exception $err) {
         return response()->json([
-            "messege"=> $err,
+            "messege" => $err->getMessage(),
         ]);
-      }
+    }
     }
 
     /**

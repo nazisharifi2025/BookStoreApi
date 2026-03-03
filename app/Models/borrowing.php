@@ -24,10 +24,10 @@ class borrowing extends Model
         'returned_date',
     ];
     public function books(){
-       return $this->belongsTo(Book::class);
+       return $this->belongsTo(Book::class, 'book_id');
     }
     public function member_borrowing(){
-       return $this->belongsTo(member::class);
+       return $this->belongsTo(member::class, 'member_id');
     }
     public function isOverdue(){
         return $this->due_date < Carbon::today() && $this->status === "borrowed";
