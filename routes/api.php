@@ -15,3 +15,5 @@ Route::apiResource('Author' , AuthorController::class);
 Route::apiResource('Book' , BookController::class);
 Route::apiResource('Members', MembersController::class);
 Route::apiResource('Borrow', BorrowingController::class)->only(['index', 'store', 'show']);
+
+Route::post('/Borrowing/{borrowing}/return', [BorrowingController::class , 'returnBook']);
