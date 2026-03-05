@@ -9,6 +9,7 @@ class AuthController extends Controller
     public function Auth(Request $request){
         $request->validate([
             "name"=> "required|string|min:3|max:25",
+            "email"=> "required|email|unique:user,email,id",
         ])
     }
 }
