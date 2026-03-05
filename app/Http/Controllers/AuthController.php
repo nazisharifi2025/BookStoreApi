@@ -15,6 +15,7 @@ class AuthController extends Controller
         ]);
         User::create([
             "name"=> $valedatedUser->name,
+            "email"=> $valedatedUser->email,
             
         ])
     }
