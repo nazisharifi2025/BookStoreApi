@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -13,11 +14,13 @@ class AuthController extends Controller
             "email"=> "required|email|unique:user,email,id",
             "password"=> "required|string|min:6|max:25|confirmed",
         ]);
-        User::create([
+        $user = User::create([
             "name"=> $valedatedUser["name"],
             "email"=> $valedatedUser["email"],
-            "password"=> hash::make($valedatedUser["password"]),
+            "password"=> Hash::make($valedatedUser["password"]),
             
-        ])
+        ]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+
     }
 }
