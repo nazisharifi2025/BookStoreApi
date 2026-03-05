@@ -14,9 +14,9 @@ class AuthController extends Controller
             "password"=> "required|string|min:6|max:25|confirmed",
         ]);
         User::create([
-            "name"=> $valedatedUser->name,
-            "email"=> $valedatedUser->email,
-            "password"=> bcrypt($valedatedUser->password),
+            "name"=> $valedatedUser["name"],
+            "email"=> $valedatedUser["email"],
+            "password"=> hash::make($valedatedUser["password"]),
             
         ])
     }
