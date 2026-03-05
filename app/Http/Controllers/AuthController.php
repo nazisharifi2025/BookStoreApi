@@ -10,6 +10,7 @@ class AuthController extends Controller
         $request->validate([
             "name"=> "required|string|min:3|max:25",
             "email"=> "required|email|unique:user,email,id",
+            "password"=> "required|string|min:6|max-25",
         ])
     }
 }
