@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function Auth(Request $request){
+    public function register(Request $request){
        $valedatedUser=  $request->validate([
             "name"=> "required|string|min:3|max:25",
             "email"=> "required|email|unique:user,email,id",
@@ -21,6 +21,10 @@ class AuthController extends Controller
             
         ]);
         $token = $user->createToken('auth_token')->plainTextToken;
+        return response()->json([
+            "user"=> $user,
+            "access_token"=> $token,
 
+        ]);
     }
 }
