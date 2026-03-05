@@ -23,6 +23,7 @@ class AuthRequest extends FormRequest
     {
         return [
             "name"=> "required|string|min:3|max:25",
+            "email"=> "required|email|unique:user,email",
         ];
     }
 }
