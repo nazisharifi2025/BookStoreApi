@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BorrowingController;
@@ -18,3 +19,7 @@ Route::apiResource('Borrow', BorrowingController::class)->only(['index', 'store'
 
 Route::post('/Borrowing/{borrowing}/return', [BorrowingController::class , 'returnBook']);
 Route::get('/Borrowing/overdue',[BorrowingController::class, 'overdue']);
+
+
+// Authentication Route
+Route::post('/register', [AuthController::class, 'register']);
