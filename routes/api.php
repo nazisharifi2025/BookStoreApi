@@ -23,3 +23,4 @@ Route::get('/Borrowing/overdue',[BorrowingController::class, 'overdue']);
 
 // Authentication Route
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/Login' , [AuthController::class , 'login']);
