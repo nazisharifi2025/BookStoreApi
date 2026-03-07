@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\userResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,17 +15,19 @@ class AuthController extends Controller
             "email"=> "required|email|unique:users,email",
             "password"=> "required|string|min:6|max:25|confirmed",
         ]);
-        $user = User::create([
-            "name"=> $valedatedUser["name"],
-            "email"=> $valedatedUser["email"],
-            "password"=> Hash::make($valedatedUser["password"]),
-            
-        ]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response()->json([
-            "user"=> $user,
-            "access_token"=> $token,
+    //php artisan install:api
+    $user = User::create([
+        "name"=> $valedatedUser['name'],
+        "email"=> $valedatedUser["email"],
+        "password"=> Hash::make( $valedatedUser["password"]),
 
-        ]);
+    ]);
+    $token = $user->createToken('auth_token')->plainTextToken;
+    return response()->json([
+        "success"=> true,
+        "user"=> new userResource($user),
+        "token"=> $token
+    ]);
+
     }
 }
