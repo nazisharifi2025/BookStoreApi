@@ -50,5 +50,8 @@ class AuthController extends Controller
     }
     public function logout(Request $request){
           $user = User->tokens()->delete();
+          return response()->json([
+            "data"=> "you are log Out seccesssfully"
+          ]);
     }
 }
