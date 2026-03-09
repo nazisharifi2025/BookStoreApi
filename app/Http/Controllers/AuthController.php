@@ -31,9 +31,21 @@ class AuthController extends Controller
 
     }
     public function Login(Request $request){
-        $request->validate([
+        $valedatedUser =$request->validate([
             "email"=> "required|string",
             "password"=> "requiered|string",
         ]);
+        $user = User::where('email', $valedatedUser['email'])->first();
+        if(!$user || !Hash::check($valedatedUser['password'] , $user->password)){
+            return response()->json([
+                "seccess"=> false,
+                "message"=> "Not Authorized",
+            ]);
+        }
+        $token = $user->createToken('auth_token')->plainTextToken;
+    return response()->json([
+        "success"=> true,
+        "token"=> $token
+    ]);
     }
 }
