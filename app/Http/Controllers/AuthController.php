@@ -42,7 +42,7 @@ class AuthController extends Controller
                 "message"=> "Not Authorized",
             ]);
         }
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $token = $user->createToken('auth_token',['read' , 'dalete'])->plainTextToken;
     return response()->json([
         "success"=> true,
         "token"=> $token
