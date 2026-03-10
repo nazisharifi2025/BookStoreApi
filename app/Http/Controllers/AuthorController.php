@@ -94,6 +94,9 @@ class AuthorController extends Controller
     public function update(CreateAuthorRequest $request, string $id)
     {
        try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                
+        }
          $author = Author::findOrFail($id);
        $author->update($request->validated());
        return response()->json([
