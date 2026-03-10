@@ -93,6 +93,9 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, string $id)
     {
         try{
+             if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+            }
         $updateBook = Book::findOrFail($id);
         $updateBook->update($request->validated());
         return response()->json([
