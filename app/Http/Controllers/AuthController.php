@@ -55,5 +55,8 @@ class AuthController extends Controller
             "data"=> "you are logged Out"
           ]);
         }
+        return response()->json([
+            "message"=> "you are not loged out"
+        ]);
     }
 }
