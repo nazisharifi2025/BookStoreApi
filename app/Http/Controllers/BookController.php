@@ -50,7 +50,9 @@ class BookController extends Controller
     {
         try{
             if(!$request->user() || !$request->user()->tokenCan('create')) {
-              
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
             }
             $books = Book::create($request->validated());
         $books->load("authors");
