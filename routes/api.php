@@ -11,9 +11,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function(){
+    Route::apiResource('Author' , AuthorController::class);
+    Route::apiResource('Book' , BookController::class);
+    Route::post('logout', [AuthController::class , 'logout']);
 
-Route::apiResource('Author' , AuthorController::class);
-Route::apiResource('Book' , BookController::class);
+});
+
 Route::apiResource('Members', MembersController::class);
 Route::apiResource('Borrow', BorrowingController::class)->only(['index', 'store', 'show']);
 
