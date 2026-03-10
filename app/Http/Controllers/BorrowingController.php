@@ -18,6 +18,9 @@ class BorrowingController extends Controller
     public function index(Request $request)
     {
        try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                
+        }
          $borrow = borrowing::with(['books', 'member_borrowing']);
          $borrow->load('books', "member_borrowing");
         return BorrowResource::collection($borrow);
