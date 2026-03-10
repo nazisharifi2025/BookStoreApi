@@ -71,7 +71,9 @@ class BookController extends Controller
     {
        try{
          if(!$request->user() || !$request->user()->tokenCan('create')) {
-               
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
             }
          $book = Book::findOrFail($id);
         return response()->json([
