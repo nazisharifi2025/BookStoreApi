@@ -17,6 +17,9 @@ class MembersController extends Controller
     public function index(Request $request)
     {
        try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+        }
          $q = member::with('activBorroing');
         if($request->has('search')){
             $search = $request->search;
