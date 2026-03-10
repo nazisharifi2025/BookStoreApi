@@ -46,6 +46,9 @@ class AuthorController extends Controller
     {
      try{
            //
+           if(!$request->user() || !$request->user()->tokenCan('create')) {
+              
+           }
         $author = Author::create([
             "name"=> $request->name,
             "bio"=> $request->bio,
