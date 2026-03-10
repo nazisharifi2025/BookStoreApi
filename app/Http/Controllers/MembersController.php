@@ -113,7 +113,10 @@ class MembersController extends Controller
     public function destroy(Request $request ,string $id)
     {
         try{
-           
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
         }
         $member = member::findOrFail($id);
         $member->load(['borrowing','activBorroing']);
