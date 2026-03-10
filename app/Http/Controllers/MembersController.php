@@ -113,6 +113,8 @@ class MembersController extends Controller
     public function destroy(Request $request ,string $id)
     {
         try{
+           
+        }
         $member = member::findOrFail($id);
         $member->load(['borrowing','activBorroing']);
       if($member->activBorroing()->count()>0){
