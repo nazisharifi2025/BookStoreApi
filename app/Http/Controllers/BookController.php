@@ -116,7 +116,9 @@ class BookController extends Controller
     public function destroy(Request $request , string $id)
     {
         try{
-            
+             if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+            }
         $findBook = Book::findOrFial($id);
         $findBook->delete();
         return response()->json([
