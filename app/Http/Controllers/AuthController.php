@@ -49,14 +49,17 @@ class AuthController extends Controller
     ]);
     }
     public function logout(Request $request){
+        try{
         if(!$request->user() && $request->user()->currentAccessToken()){
            $request->user()->tokens()->delete();
           return response()->json([
             "data"=> "you are logged Out"
           ]);
         }
+        }catch(\Exception $e){
         return response()->json([
             "message"=> "you are not loged out"
         ]);
+        }
     }
 }
