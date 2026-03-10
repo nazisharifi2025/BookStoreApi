@@ -17,6 +17,11 @@ class BookController extends Controller
     public function index(Request $request)
     {
         try{
+            if(!$request->user() || !$request->user()->tokenCan('read')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+            }
             $query = Book::with('Authors');
         if($request->has('search')){
             $search = $request->search;
