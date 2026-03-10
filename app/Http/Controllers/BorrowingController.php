@@ -65,7 +65,9 @@ class BorrowingController extends Controller
     public function show(Request $request, string $id)
     {
        try{
-        
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                
+        }
          $borrow = borrowing::findOrFail($id);
          $borrow->load('books', "member_borrowing");
         return response()->json([
