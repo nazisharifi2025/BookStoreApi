@@ -16,7 +16,9 @@ class AuthorController extends Controller
     public function index(Request $request)
     {
         try{
-            
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+                
+            }
         $query = Author::with('Book');
         if($request->has('search')){
             $search = $request->search;
