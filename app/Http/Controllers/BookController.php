@@ -49,6 +49,9 @@ class BookController extends Controller
     public function store(CreateBookRequest $request)
     {
         try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+              
+            }
             $books = Book::create($request->validated());
         $books->load("authors");
         return new BookRsource($books);
