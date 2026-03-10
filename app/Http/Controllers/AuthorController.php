@@ -117,6 +117,9 @@ class AuthorController extends Controller
     public function destroy(Request $request, Author $author)
     {
        try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                
+        }
          $author->delete();
         return response()->json([
         "deletedAuthor"=> "one author deleted"
