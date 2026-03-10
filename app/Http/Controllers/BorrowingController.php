@@ -15,7 +15,7 @@ class BorrowingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
        try{
          $borrow = borrowing::with(['books', 'member_borrowing']);
