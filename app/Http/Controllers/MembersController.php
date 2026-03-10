@@ -67,6 +67,9 @@ class MembersController extends Controller
     public function show(Request $request, string $id)
     {
       try{
+          if(!$request->user() || !$request->user()->tokenCan('create')) {
+             
+        }
           $SingelMember = member::findOrFail($id);
         return response()->json([
             "singleMmber"=> $SingelMember,
