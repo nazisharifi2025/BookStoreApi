@@ -39,7 +39,9 @@ class BorrowingController extends Controller
     {
        try {
         if(!$request->user() || !$request->user()->tokenCan('create')) {
-               
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
         }
         $borrow = borrowing::create($request->validated());
         $borrow->load('books', "member_borrowing");
