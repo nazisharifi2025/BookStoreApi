@@ -62,9 +62,10 @@ class BorrowingController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
        try{
+        
          $borrow = borrowing::findOrFail($id);
          $borrow->load('books', "member_borrowing");
         return response()->json([
