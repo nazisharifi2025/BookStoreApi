@@ -47,6 +47,9 @@ class MembersController extends Controller
     public function store(CreateMemmberRequest $request)
     {
         try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+            
+        }
         $Members = member::create($request->validated());
         return response()->json($Members);
         }catch(Exception $err){
