@@ -71,6 +71,9 @@ class AuthorController extends Controller
     public function show(Request $request, string $id)
     {
       try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+        }
          $Author = Author::findOrfail($id);
        return response()->json([
         "SingelAuthor"=> $Author,
