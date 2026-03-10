@@ -47,7 +47,9 @@ class AuthorController extends Controller
      try{
            //
            if(!$request->user() || !$request->user()->tokenCan('create')) {
-              
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
            }
         $author = Author::create([
             "name"=> $request->name,
