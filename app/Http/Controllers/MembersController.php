@@ -90,6 +90,9 @@ class MembersController extends Controller
     public function update(UpdateMemmberRequest $request, string $id)
     {
         try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+        }
             $member = member::findOrFail($id);
         $member->update($request->validated());
         return response()->json([
