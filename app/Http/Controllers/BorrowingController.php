@@ -38,6 +38,9 @@ class BorrowingController extends Controller
     public function store(createBorrowRequest $request)
     {
        try {
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+        }
         $borrow = borrowing::create($request->validated());
         $borrow->load('books', "member_borrowing");
 
