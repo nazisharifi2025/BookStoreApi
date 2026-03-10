@@ -95,7 +95,9 @@ class AuthorController extends Controller
     {
        try{
         if(!$request->user() || !$request->user()->tokenCan('create')) {
-                
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
         }
          $author = Author::findOrFail($id);
        $author->update($request->validated());
