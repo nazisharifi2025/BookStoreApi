@@ -18,7 +18,9 @@ class MembersController extends Controller
     {
        try{
         if(!$request->user() || !$request->user()->tokenCan('create')) {
-               
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
         }
          $q = member::with('activBorroing');
         if($request->has('search')){
