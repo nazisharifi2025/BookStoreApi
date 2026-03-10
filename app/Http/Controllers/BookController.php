@@ -70,6 +70,9 @@ class BookController extends Controller
     public function show(Request $request , string $id)
     {
        try{
+         if(!$request->user() || !$request->user()->tokenCan('create')) {
+               
+            }
          $book = Book::findOrFail($id);
         return response()->json([
             "shoingBook"=> $book,
