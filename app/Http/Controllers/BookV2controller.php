@@ -66,9 +66,24 @@ class BookV2controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+        public function show(Request $request , string $id)
     {
-        //
+       try{
+         if(!$request->user() || !$request->user()->tokenCan('read-book')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+            }
+         $book = Book::findOrFail($id);
+        return response()->json([
+            "shoingBook"=> $book,
+        ]);
+       }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Book with ". $id . " not found"
+        ]);
+       }
     }
 
     /**
