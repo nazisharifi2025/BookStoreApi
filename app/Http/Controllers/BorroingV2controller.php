@@ -105,8 +105,14 @@ class BorroingV2controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+   public function overdue(){
+    $overdueBorrowings = borrowing::with(['books', 'member_borrowing'])
+    ->where('status', 'borrowed')
+    ->where('due_date', '<', now())->get();
+
+    Borrowing::where('status', 'borrowed')
+    ->where('due_date', '<', now())
+    ->update(['status' => 'overdue']);
+    return BorrowResource::collection($overdueBorrowings);
+   }
 }
