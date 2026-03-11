@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index(Request $request)
     {
         try{
-            if(!$request->user() || !$request->user()->tokenCan('read')) {
+            if(!$request->user() || !$request->user()->tokenCan('read-book')) {
                 return response()->json([
                     "message" => "Unauthorized"
                 ], 303);
@@ -49,7 +49,7 @@ class BookController extends Controller
     public function store(CreateBookRequest $request)
     {
         try{
-            if(!$request->user() || !$request->user()->tokenCan('create')) {
+            if(!$request->user() || !$request->user()->tokenCan('create-book')) {
                 return response()->json([
                     "message" => "Unauthorized"
                 ], 303);
@@ -70,7 +70,7 @@ class BookController extends Controller
     public function show(Request $request , string $id)
     {
        try{
-         if(!$request->user() || !$request->user()->tokenCan('create')) {
+         if(!$request->user() || !$request->user()->tokenCan('read-book')) {
                 return response()->json([
                     "message" => "Unauthorized"
                 ], 303);
@@ -93,7 +93,7 @@ class BookController extends Controller
     public function update(UpdateBookRequest $request, string $id)
     {
         try{
-             if(!$request->user() || !$request->user()->tokenCan('create')) {
+             if(!$request->user() || !$request->user()->tokenCan('update-book')) {
                 return response()->json([
                     "message" => "Unauthorized"
                 ], 303);
@@ -116,7 +116,7 @@ class BookController extends Controller
     public function destroy(Request $request , string $id)
     {
         try{
-             if(!$request->user() || !$request->user()->tokenCan('create')) {
+             if(!$request->user() || !$request->user()->tokenCan('delete-book')) {
                 return response()->json([
                     "message" => "Unauthorized"
                 ], 303);

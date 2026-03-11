@@ -28,12 +28,11 @@ class AuthController extends Controller
         "user"=> new userResource($user),
         "token"=> $token
     ]);
-
     }
     public function Login(Request $request){
         $valedatedUser =$request->validate([
             "email"=> "required|string",
-            "password"=> "requiered|string",
+            "password"=> "required|string",
         ]);
         $user = User::where('email', $valedatedUser['email'])->first();
         if(!$user || !Hash::check($valedatedUser['password'] , $user->password)){
@@ -42,15 +41,16 @@ class AuthController extends Controller
                 "message"=> "Not Authorized",
             ]);
         }
-        $token = $user->createToken('auth_token',['read' , 'dalete' , 'update'])->plainTextToken;
+        $token = $user->createToken('auth_token',['read-book' , 'dalete-book' , 'read-author'])->plainTextToken;
     return response()->json([
         "success"=> true,
+        "user"=> new userResource($user),
         "token"=> $token
     ]);
     }
     public function logout(Request $request){
         try{
-        if(!$request->user() && $request->user()->currentAccessToken()){
+        if($request->user() && $request->user()->currentAccessToken()){
            $request->user()->tokens()->delete();
           return response()->json([
             "data"=> "you are logged Out"
