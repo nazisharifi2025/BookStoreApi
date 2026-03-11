@@ -40,9 +40,27 @@ class AuthoreV2controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+   public function store(Request $request)
     {
-        //
+     try{
+           //
+           if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+           }
+        $author = Author::create([
+            "name"=> $request->name,
+            "bio"=> $request->bio,
+            "nationality"=> $request->nationality,
+        ]);
+        return response()->json([
+            "created_author"=> $author
+        ]);
+     }
+     catch(Exception $error){
+        return response()->json($error);
+     }
     }
 
     /**
