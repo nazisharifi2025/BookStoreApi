@@ -66,9 +66,24 @@ class AuthoreV2controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+     public function show(Request $request, string $id)
     {
-        //
+      try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+         $Author = Author::findOrfail($id);
+       return response()->json([
+        "SingelAuthor"=> $Author,
+       ]);
+      }
+      catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $id . " not found"
+        ]);
+      }
     }
 
     /**
