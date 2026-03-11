@@ -27,7 +27,7 @@ class MemberV2controller extends Controller
             $search = $request->search;
             $q->where(function($query)use($search){
                 $query->where('name', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%")
+                ->orWhere('whatsApp_number', 'LIKE', "%{$search}%")
                 ->orWhereHas('activBorroing', function($qu)use($search){
                     $qu->where('name', 'LIKE', "%{$search}%");
                 });
@@ -112,8 +112,31 @@ class MemberV2controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+   public function destroy(Request $request ,string $id)
     {
-        //
+        try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+        $member = member::findOrFail($id);
+        $member->load(['borrowing','activBorroing']);
+      if($member->activBorroing()->count()>0){
+        return response()->json([
+            "message"=> "tou cannot delete ". $member->name . " bacause he/she borrowed " . $member->activBorroing()->count() . " books",
+        ]);
+      }
+      else{
+        $member->delete();
+        return response()->json([
+            "message"=> $member->name . " has been deleted successfully he/she can no longer use our facilities",
+        ]);
+      }
+        }catch(Exception $err){
+            return response()->json([
+                "error"=> "Somting went wrong"
+            ]);
+        }
     }
 }
