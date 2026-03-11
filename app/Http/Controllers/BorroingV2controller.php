@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\BorrowResource;
+use App\Models\borrowing;
+use Exception;
 use Illuminate\Http\Request;
 
 class BorroingV2controller extends Controller
@@ -9,9 +12,21 @@ class BorroingV2controller extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+   public function index(Request $request)
     {
-        //
+       try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+         $borrow = borrowing::with(['books', 'member_borrowing']);
+         $borrow->load('books', "member_borrowing");
+        return BorrowResource::collection($borrow);
+       }
+       catch(Exception $error){
+        return $error ;
+       }
     }
 
     /**
