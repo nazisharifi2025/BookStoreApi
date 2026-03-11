@@ -61,9 +61,25 @@ class BorroingV2controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, string $id)
     {
-        //
+       try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+         $borrow = borrowing::findOrFail($id);
+         $borrow->load('books', "member_borrowing");
+        return response()->json([
+            "shoing borrow"=> $borrow,
+        ]);
+       }
+       catch(Exception $err){
+        return response()->json([
+            "messege"=> $err->getMessage(),
+        ]);
+       }
     }
 
     /**
