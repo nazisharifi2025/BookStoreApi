@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateAuthorRequest;
 use App\Models\Author;
 use Exception;
 use Illuminate\Http\Request;
@@ -89,9 +90,25 @@ class AuthoreV2controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CreateAuthorRequest $request, string $id)
     {
-        //
+       try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+         $author = Author::findOrFail($id);
+       $author->update($request->validated());
+       return response()->json([
+        "UpdetedData"=> $author 
+       ]);
+       }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $id . " not found"
+        ]);
+       }
     }
 
     /**
