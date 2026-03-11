@@ -85,10 +85,22 @@ class BorroingV2controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+     public function returnBook(Borrowing $borrowing){
+   if($borrowing->status !== "borrowed"){
+    return response()->json([
+        "message"=> "This book is not currently borrowed",
+    ]);
+   }
+   else{
+     $borrowing->update([
+        "returned_date"=> now(),
+        "status"=> "returned",
+    ]);
+    $borrowing->books->returnBook();
+    $borrowing->load('books', "member_borrowing");
+    return new BorrowResource($borrowing);
+   }
+   }
 
     /**
      * Remove the specified resource from storage.
