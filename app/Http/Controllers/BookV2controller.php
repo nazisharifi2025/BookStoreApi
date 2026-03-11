@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateBookRequest;
+use App\Http\Requests\UpdateBookRequest;
 use App\Http\Resources\BookRsource;
 use App\Models\Book;
 use Exception;
@@ -89,9 +90,24 @@ class BookV2controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+     public function update(UpdateBookRequest $request, string $id)
     {
-        //
+        try{
+             if(!$request->user() || !$request->user()->tokenCan('update-book')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+            }
+        $updateBook = Book::findOrFail($id);
+        $updateBook->update($request->validated());
+        return response()->json([
+            "updatdBok"=> $updateBook,
+        ]);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "Somting Went Wrong",
+            ]);
+        }
     }
 
     /**
