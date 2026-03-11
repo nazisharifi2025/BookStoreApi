@@ -114,8 +114,23 @@ class AuthoreV2controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+  public function destroy(Request $request, Author $author)
     {
-        //
+       try{
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+         $author->delete();
+        return response()->json([
+        "deletedAuthor"=> "one author deleted"
+        ]);
+       }
+       catch(Exception $err){
+        return response()->json([
+            "message"=> "Author with ". $author->id . " not found"
+        ]);
+       }
     }
 }
