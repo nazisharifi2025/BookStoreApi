@@ -113,8 +113,23 @@ class BookV2controller extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request , string $id)
     {
-        //
+        try{
+             if(!$request->user() || !$request->user()->tokenCan('delete-book')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+            }
+        $findBook = Book::findOrFial($id);
+        $findBook->delete();
+        return response()->json([
+            "deletedbook"=> $findBook->title ."Deleted successfuly",
+        ]);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "this book is not deleted",
+            ]);
+        }
     }
 }
