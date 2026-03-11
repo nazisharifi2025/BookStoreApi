@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateMemmberRequest;
 use App\Http\Resources\MembersResource;
 use App\Models\member;
 use Exception;
@@ -43,9 +44,21 @@ class MemberV2controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+   public function store(CreateMemmberRequest $request)
     {
-        //
+        try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+        $Members = member::create($request->validated());
+        return response()->json($Members);
+        }catch(Exception $err){
+            return response()->json([
+                "messege"=> "no created member",
+            ]);
+        }
     }
 
     /**
