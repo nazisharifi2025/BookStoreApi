@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
+use Exception;
 use Illuminate\Http\Request;
 
 class AuthoreV2controller extends Controller
@@ -9,10 +11,31 @@ class AuthoreV2controller extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+     public function index(Request $request)
     {
-        //
-    }
+        try{
+            if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+            }
+        $query = Author::with('Book');
+        if($request->has('search')){
+            $search = $request->search;
+            $query->where(function($qu)use($search){
+                $qu->where('name','LIKE',"%{$search}%")
+                ->orWhereHas('Book', function($BookQuery) use($search){
+                    $BookQuery->where('title', 'LIKE', "%{$search}%");
+                });
+            });
+        }
+        $authors = $query->paginate(5);
+        return  response()->json($authors);
+        }
+        catch(Exception $err){
+            return $err ;
+        }
+    }  
 
     /**
      * Store a newly created resource in storage.
