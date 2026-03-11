@@ -64,9 +64,24 @@ class MemberV2controller extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+     public function show(Request $request, string $id)
     {
-        //
+      try{
+          if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+          $SingelMember = member::findOrFail($id);
+        return response()->json([
+            "singleMmber"=> $SingelMember,
+        ]);
+      }
+      catch(Exception $err){
+        return response()->json([
+            "message"=> "Member with ". $id . " not found"
+        ]);
+      }
     }
 
     /**
