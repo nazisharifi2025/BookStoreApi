@@ -31,7 +31,8 @@ class AuthorController extends Controller
                 });
             });
         }
-        $authors = $query->paginate(5);
+        // paginit 5 Authre shing but rigth now 10
+        $authors = $query->paginate(10);
         return  response()->json($authors);
         }
         catch(Exception $err){
