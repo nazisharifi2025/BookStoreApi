@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\createBorrowRequest;
 use App\Http\Resources\BorrowResource;
+use App\Models\Book;
 use App\Models\borrowing;
 use Exception;
 use Illuminate\Http\Request;
@@ -32,9 +34,28 @@ class BorroingV2controller extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(createBorrowRequest $request)
     {
-        //
+       try {
+        if(!$request->user() || !$request->user()->tokenCan('create')) {
+                return response()->json([
+                    "message" => "Unauthorized"
+                ], 303);
+        }
+        $borrow = borrowing::create($request->validated());
+        $borrow->load('books', "member_borrowing");
+
+        $bookId = $borrow->books->id;
+        $book = Book::findOrFail($bookId);
+
+          $book->barrow();
+
+        return new BorrowResource($borrow);
+    } catch (Exception $err) {
+        return response()->json([
+            "messege" => $err->getMessage(),
+        ]);
+    }
     }
 
     /**
